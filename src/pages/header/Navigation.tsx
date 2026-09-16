@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CSSProperties } from "react";
 import { Link } from "react-router-dom";
-import BookTravelMenu from "../../components/header/mega/BookTravelMenu";
+import BookTravelMenu from "./mega/BookTravelMenu";
 import {
   Menu,
   ChevronDown,

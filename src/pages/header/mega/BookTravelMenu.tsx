@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Bus, Plane, Ticket, Users } from "lucide-react";
+import type { CSSProperties } from "react";
 
 
 export default function BookTravelMenu() {
@@ -29,8 +30,6 @@ export default function BookTravelMenu() {
       link: "/airport",
     },
   ];
-  import { CSSProperties } from "react";
-
 const styles: Record<string, CSSProperties> = {
     wrapper: {
   display: "grid",
@@ -164,6 +163,8 @@ button: {
   cursor: "pointer",
   width: "fit-content",
 },
+};
+
 return (
   <div style={styles.wrapper}>
     {/* LEFT */}

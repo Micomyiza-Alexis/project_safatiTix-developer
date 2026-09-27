@@ -14,13 +14,13 @@ import {
   Ticket,
   X,
 } from "lucide-react";
-import { useAuth } from "../../components/AuthContext";
-import { useCommuterData } from "./CommuterDataContext";
-import { formatCurrency, formatDate, formatTime } from "./dashboard/utils";
-import type { BookingRecord } from "./dashboard/types";
-import StatusBadge from "../../components/StatusBadge";
-import TripCard from "../../components/TripCard";
-import TicketPreviewModal from "../../components/TicketPreviewModal";
+import { useAuth } from "../../../../components/AuthContext";
+import { useCommuterData } from "../../CommuterDataContext";
+import { formatCurrency, formatDate, formatTime } from "../utils";
+import type { BookingRecord } from "../types";
+import StatusBadge from "../../../../components/StatusBadge";
+import TripCard from "../../../../components/TripCard";
+import TicketPreviewModal from "../../../../components/TicketPreviewModal";
 
 function greeting() {
   const h = new Date().getHours();

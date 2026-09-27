@@ -3,6 +3,12 @@ import { ThemeProvider } from './components/ThemeContext';
 import { AuthProvider } from './components/AuthContext';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import CommuterDashboard from './pages/commuter/commuterDashboard';
+import CommuterShell from './pages/commuter/CommuterShell';
+import CommuterDashboardPage from './pages/commuter/dashboard/components/DashboardPage';
+import MyTicketsPage from './pages/commuter/MyTicketsPage';
+import LiveTripsPage from './pages/commuter/LiveTripsPage';
+import HelpCenterPage from './pages/commuter/HelpCenterPage';
+import SettingsPage from './pages/commuter/SettingsPage';
 import HomePage from './pages/HomePage';
 import { LandingPage } from './pages/public/LandingPage';
 import Layout from './pages/Layout';
@@ -121,7 +127,7 @@ const App = () => {
               </Route>
 
               <Route path='commuter' element={<RequireRole allowed={["commuter"]}><CommuterLayout/></RequireRole>}>
-                <Route index element={<CommuterDashboard/>} />
+                <Route index element={<Navigate to='/commuter' replace />} />
                 <Route path='search-bus' element={<SearchBusPage/>} />
                 <Route path='seatmap' element={<SeatMapPage/>} />
                 <Route path='payment' element={<PaymentPage/>} />
@@ -146,6 +152,14 @@ const App = () => {
             <Route path='/reset-password' element={<ResetPassword/>} />
             <Route path='/verify-email' element={<VerifyEmail/>} />
             <Route path='/profile' element={<RequireRole allowed={["commuter","company_admin","driver","admin"]}><ProfilePage/></RequireRole>} />
+            <Route path='/commuter' element={<RequireRole allowed={["commuter"]}><CommuterShell/></RequireRole>}>
+              <Route index element={<CommuterDashboardPage/>} />
+              <Route path='search' element={<SearchBusPage/>} />
+              <Route path='tickets' element={<MyTicketsPage/>} />
+              <Route path='live' element={<LiveTripsPage/>} />
+              <Route path='help' element={<HelpCenterPage/>} />
+              <Route path='settings' element={<SettingsPage/>} />
+            </Route>
             <Route path='/seatmap' element={<RequireRole allowed={["commuter"]}><SeatMapPage/></RequireRole>} />
             <Route path='/commuter/search' element={<RequireRole allowed={["commuter"]}><SearchBusPage/></RequireRole>} />
             <Route path='/commuter/search-bus' element={<RequireRole allowed={["commuter"]}><SearchBusPage/></RequireRole>} />

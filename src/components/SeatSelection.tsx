@@ -44,13 +44,6 @@ export default function SeatSelection({
           return;
         }
 
-        // Fallback for older backend: use seat options from trip search response
-        const fallbackSeats = Array.isArray(trip.seat_options) ? trip.seat_options : [];
-        if (fallbackSeats.length > 0) {
-          if (!cancelled) setSeatNumbers(fallbackSeats);
-          return;
-        }
-
         let message = 'Failed to load seats';
         if (contentType.includes('application/json')) {
           const json = await res.json();

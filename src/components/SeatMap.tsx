@@ -449,23 +449,18 @@ export default function SeatMap({ scheduleId, price = 0, className = '', segment
   }, [onBooked]);
 
   const layout = useMemo(() => {
-    const seatsByNum = new Map<number, Seat>();
-    seats.forEach(s => seatsByNum.set(parseInt(s.seat_number), s));
+    const passengerSeats = seats
+      .filter((seat) => !seat.is_driver && seat.state !== 'DRIVER')
+      .sort((a, b) => parseInt(a.seat_number) - parseInt(b.seat_number));
+    const frontRight = passengerSeats[0];
+    const remaining = passengerSeats.slice(1);
 
     return {
-      frontRight: seatsByNum.get(1),
-      rows: [
-        { left: [2, 3], right: [4, 5] },
-        { left: [6, 7], right: [8, 9] },
-        { left: [10, 11], right: [12, 13] },
-        { left: [14, 15], right: [16, 17] },
-        { left: [18, 19], right: [20, 21] },
-        { left: [22, 23], right: [24, 25] },
-        { left: [26, 27], right: [28, 29] },
-      ].map(row => ({
-        left: row.left.map(n => seatsByNum.get(n)).filter(Boolean) as Seat[],
-        right: row.right.map(n => seatsByNum.get(n)).filter(Boolean) as Seat[],
-      }))
+      frontRight,
+      rows: Array.from({ length: Math.ceil(remaining.length / 4) }, (_, index) => {
+        const rowSeats = remaining.slice(index * 4, index * 4 + 4);
+        return { left: rowSeats.slice(0, 2), right: rowSeats.slice(2, 4) };
+      }),
     };
   }, [seats]);
 
